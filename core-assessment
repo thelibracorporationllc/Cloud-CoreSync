@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud CoreSync</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        section { margin-bottom: 30px; display: none; }
+        #section1 { display: block; }
+        h2 { color: #333; }
+        .question { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="radio"], input[type="checkbox"] { margin-right: 10px; }
+        select { margin-bottom: 10px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        #navigation { margin-bottom: 20px; }
+        #navigation button { margin-right: 10px; }
+        #results { margin-top: 20px; white-space: pre-wrap; background: #f8f9fa; padding: 10px; border: 1px solid #ddd; }
+        #consent { color: red; font-weight: bold; margin-bottom: 20px; }
+    </style>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <h1>Cloud CoreSync</h1>
+    <div id="consent">
+        By submitting this form, you consent to your test results being sent to YOUR_EMAIL_ADDRESS for review and analysis. Results are not stored elsewhere.
+    </div>
+    <p>Navigate through sections. Answer all questions, then click Submit. Your results will be emailed and shown here—paste to Grok for analysis if needed.</p>
+    
+    <div id="navigation">
+        <button onclick="showSection(1)">Section 1</button>
+        <button onclick="showSection(2)">Section 2</button>
+        <button onclick="showSection(3)">Section 3</button>
+        <button onclick="showSection(4)">Section 4</button>
+        <button onclick="showSection(5)">Section 5</button>
+        <button onclick="showSection(6)">Section 6</button>
+    </div>
+    
+    <form id="testForm">
+        <section id="section1">
+            <h2>Section 1: Personality Preferences (MBTI-Inspired)</h2>
+            <p>Choose the statement that best fits you.</p>
+            <div class="question">
+                <p>1.</p>
+                <label><input type="radio" name="q1" value="A"> A: I feel energized after socializing with groups.</label>
+                <label><input type="radio" name="q1" value="B"> B: I feel drained after socializing and need alone time.</label>
+            </div>
+            <div class="question">
+                <p>2.</p>
+                <label><input type="radio" name="q2" value="A"> A: I focus on practical facts and real-world details.</label>
+                <label><input type="radio" name="q2" value="B"> B: I focus on abstract ideas and future possibilities.</label>
+            </div>
+            <div class="question">
+                <p>3.</p>
+                <label><input type="radio" name="q3" value="A"> A: I make decisions based on logic and objective facts.</label>
+                <label><input type="radio" name="q3" value="B"> B: I make decisions based on feelings and personal values.</label>
+            </div>
+            <div class="question">
+                <p>4.</p>
+                <label><input type="radio" name="q4" value="A"> A: I prefer structured plans and routines.</label>
+                <label><input type="radio" name="q4" value="B"> B: I prefer flexibility and spontaneity.</label>
+            </div>
+            <div class="question">
+                <p>5.</p>
+                <label><input type="radio" name="q5" value="A"> A: I enjoy meeting new people at events.</label>
+                <label><input type="radio" name="q5" value="B"> B: I prefer deep conversations with a few close friends.</label>
+            </div>
+            <div class="question">
+                <p>6.</p>
+                <label><input type="radio" name="q6" value="A"> A: I trust my senses and what I can see/touch.</label>
+                <label><input type="radio" name="q6" value="B"> B: I trust my intuition and hunches.</label>
+            </div>
+            <div class="question">
+                <p>7.</p>
+                <label><input type="radio" name="q7" value="A"> A: I prioritize fairness and consistency over harmony.</label>
+                <label><input type="radio" name="q7" value="B"> B: I prioritize empathy and relationships over rules.</label>
+            </div>
+            <div class="question">
+                <p>8.</p>
+                <label><input type="radio" name="q8" value="A"> A: I like to finish tasks before starting new ones.</label>
+                <label><input type="radio" name="q8" value="B"> B: I juggle multiple tasks and adapt as I go.</label>
+            </div>
+            <div class="question">
+                <p>9.</p>
+                <label><input type="radio" name="q9" value="A"> A: Being around others motivates me.</label>
+                <label><input type="radio" name="q9" value="B"> B: Solitude helps me recharge.</label>
+            </div>
+            <div class="question">
+                <p>10.</p>
+                <label><input type="radio" name="q10" value="A"> A: I enjoy hands-on activities.</label>
+                <label><input type="radio" name="q10" value="B"> B: I enjoy brainstorming creative concepts.</label>
+            </div>
+            <div class="question">
+                <p>11.</p>
+                <label><input type="radio" name="q11" value="A"> A: I analyze problems impartially.</label>
+                <label><input type="radio" name="q11" value="B"> B: I consider how solutions affect people.</label>
+            </div>
+            <div class="question">
+                <p>12.</p>
+                <label><input type="radio" name="q12" value="A"> A: I thrive on deadlines and organization.</label>
+                <label><input type="radio" name="q12" value="B"> B: I go with the flow and improvise.</label>
+            </div>
+            <div class="question">
+                <p>13.</p>
+                <label><input type="radio" name="q13" value="A"> A: I seek out social gatherings.</label>
+                <label><input type="radio" name="q13" value="B"> B: I prefer quiet, reflective time.</label>
+            </div>
+            <div class="question">
+                <p>14.</p>
+                <label><input type="radio" name="q14" value="A"> A: I value proven methods.</label>
+                <label><input type="radio" name="q14" value="B"> B: I value innovative theories.</label>
+            </div>
+            <div class="question">
+                <p>15.</p>
+                <label><input type="radio" name="q15" value="A"> A: I debate to find truth.</label>
+                <label><input type="radio" name="q15" value="B"> B: I avoid conflict to keep peace.</label>
+            </div>
+            <div class="question">
+                <p>16.</p>
+                <label><input type="radio" name="q16" value="A"> A: I plan my day in advance.</label>
+                <label><input type="radio" name="q16" value="B"> B: I let things unfold naturally.</label>
+            </div>
+        </section>
+        
+        <section id="section2">
+            <h2>Section 2: Core Motivations and Fears (Enneagram-Inspired)</h2>
+            <p>Choose the one statement that best describes you.</p>
+            <div class="question">
+                <p>1.</p>
+                <label><input type="radio" name="q2_1" value="A"> A: I strive to be perfect and principled.</label>
+                <label><input type="radio" name="q2_1" value="B"> B: I focus on helping and connecting with others.</label>
+                <label><input type="radio" name="q2_1" value="C"> C: I aim to succeed and adapt to situations.</label>
+            </div>
+            <div class="question">
+                <p>2.</p>
+                <label><input type="radio" name="q2_2" value="A"> A: I seek uniqueness and deep emotions.</label>
+                <label><input type="radio" name="q2_2" value="B"> B: I observe and gather knowledge to feel competent.</label>
+                <label><input type="radio" name="q2_2" value="C"> C: I mediate conflicts to maintain peace.</label>
+            </div>
+            <div class="question">
+                <p>3.</p>
+                <label><input type="radio" name="q2_3" value="A"> A: I challenge and protect what's right.</label>
+                <label><input type="radio" name="q2_3" value="B"> B: I question and seek security through loyalty.</label>
+                <label><input type="radio" name="q2_3" value="C"> C: I pursue fun and avoid limitations.</label>
+            </div>
+            <div class="question">
+                <p>4.</p>
+                <label><input type="radio" name="q2_4" value="A"> A: I improve myself and others critically.</label>
+                <label><input type="radio" name="q2_4" value="B"> B: I give support to feel appreciated.</label>
+                <label><input type="radio" name="q2_4" value="C"> C: I perform to gain admiration.</label>
+            </div>
+            <div class="question">
+                <p>5.</p>
+                <label><input type="radio" name="q2_5" value="A"> A: I express my individuality intensely.</label>
+                <label><input type="radio" name="q2_5" value="B"> B: I detach to analyze objectively.</label>
+                <label><input type="radio" name="q2_5" value="C"> C: I accommodate to keep harmony.</label>
+            </div>
+            <div class="question">
+                <p>6.</p>
+                <label><input type="radio" name="q2_6" value="A"> A: I lead assertively and confront issues.</label>
+                <label><input type="radio" name="q2_6" value="B"> B: I prepare for doubts and build trust.</label>
+                <label><input type="radio" name="q2_6" value="C"> C: I explore options enthusiastically.</label>
+            </div>
+            <div class="question">
+                <p>7.</p>
+                <label><input type="radio" name="q2_7" value="A"> A: I follow rules for integrity.</label>
+                <label><input type="radio" name="q2_7" value="B"> B: I nurture relationships warmly.</label>
+                <label><input type="radio" name="q2_7" value="C"> C: I achieve goals ambitiously.</label>
+            </div>
+            <div class="question">
+                <p>8.</p>
+                <label><input type="radio" name="q2_8" value="A"> A: I feel melancholic and seek meaning.</label>
+                <label><input type="radio" name="q2_8" value="B"> B: I withdraw to think deeply.</label>
+                <label><input type="radio" name="q2_8" value="C"> C: I avoid tension by merging with others.</label>
+            </div>
+            <div class="question">
+                <p>9.</p>
+                <label><input type="radio" name="q2_9" value="A"> A: I demand justice and strength.</label>
+                <label><input type="radio" name="q2_9" value="B"> B: I anticipate problems cautiously.</label>
+                <label><input type="radio" name="q2_9" value="C"> C: I multitask to stay positive.</label>
+            </div>
+            <div class="question">
+                <p>10.</p>
+                <label><input type="radio" name="q2_10" value="A"> A: I reform systems ethically.</label>
+                <label><input type="radio" name="q2_10" value="B"> B: I connect personally to help.</label>
+                <label><input type="radio" name="q2_10" value="C"> C: I compete for recognition.</label>
+            </div>
+            <div class="question">
+                <p>11.</p>
+                <label><input type="radio" name="q2_11" value="A"> A: I create authentically.</label>
+                <label><input type="radio" name="q2_11" value="B"> B: I research thoroughly.</label>
+                <label><input type="radio" name="q2_11" value="C"> C: I harmonize groups.</label>
+            </div>
+            <div class="question">
+                <p>12.</p>
+                <label><input type="radio" name="q2_12" value="A"> A: I control to protect.</label>
+                <label><input type="radio" name="q2_12" value="B"> B: I doubt to prepare.</label>
+                <label><input type="radio" name="q2_12" value="C"> C: I adventure to enjoy.</label>
+            </div>
+        </section>
+        
+        <section id="section3">
+            <h2>Section 3: Instinctual Drives (IVQ-Inspired)</h2>
+            <p>Rate each statement from 1 (Not like me) to 5 (Very like me).</p>
+            <h3>Self-Preservation (SP)</h3>
+            <div class="question">
+                <p>1. I prioritize my physical health and comfort daily.</p>
+                <select name="q3_sp1">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>2. Financial security is a top concern for me.</p>
+                <select name="q3_sp2">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>3. I notice environmental details like temperature or safety immediately.</p>
+                <select name="q3_sp3">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>4. I save resources for future needs.</p>
+                <select name="q3_sp4">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>5. Routines help me feel stable.</p>
+                <select name="q3_sp5">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>6. I avoid risks to my well-being.</p>
+                <select name="q3_sp6">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>7. Personal boundaries are crucial.</p>
+                <select name="q3_sp7">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>8. I focus on practical self-care.</p>
+                <select name="q3_sp8">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <h3>Social (SO)</h3>
+            <div class="question">
+                <p>1. Group belonging and status matter a lot to me.</p>
+                <select name="q3_so1">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>2. I read social dynamics and alliances easily.</p>
+                <select name="q3_so2">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>3. Contributing to communities motivates me.</p>
+                <select name="q3_so3">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>4. I track social trends and opinions.</p>
+                <select name="q3_so4">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>5. Reputation in groups affects my decisions.</p>
+                <select name="q3_so5">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>6. I build networks for mutual support.</p>
+                <select name="q3_so6">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>7. Social roles define part of who I am.</p>
+                <select name="q3_so7">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>8. I value collective achievements.</p>
+                <select name="q3_so8">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <h3>Sexual/One-to-One (SX)</h3>
+            <div class="question">
+                <p>1. Intense connections with specific people energize me.</p>
+                <select name="q3_sx1">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>2. I seek chemistry and merging in relationships.</p>
+                <select name="q3_sx2">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>3. Passionate pursuits make me feel alive.</p>
+                <select name="q3_sx3">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>4. I can be obsessive about attractions.</p>
+                <select name="q3_sx4">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>5. Energy exchanges with others are vital.</p>
+                <select name="q3_sx5">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>6. I crave authenticity and depth one-on-one.</p>
+                <select name="q3_sx6">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>7. Competition or rivalry sparks my interest.</p>
+                <select name="q3_sx7">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>8. I indulge impulses for excitement.</p>
+                <select name="q3_sx8">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </section>
+        
+        <section id="section4">
+            <h2>Section 4: Love Expression (Love Languages)</h2>
+            <p>For each pair, choose the one that makes you feel more loved.</p>
+            <div class="question">
+                <p>1.</p>
+                <label><input type="radio" name="q4_1" value="A"> A: Hearing compliments and encouragement.</label>
+                <label><input type="radio" name="q4_1" value="B"> B: Spending undivided time together.</label>
+            </div>
+            <div class="question">
+                <p>2.</p>
+                <label><input type="radio" name="q4_2" value="A"> A: Receiving thoughtful notes.</label>
+                <label><input type="radio" name="q4_2" value="C"> C: Getting surprise gifts.</label>
+            </div>
+            <div class="question">
+                <p>3.</p>
+                <label><input type="radio" name="q4_3" value="B"> B: Having deep, focused conversations.</label>
+                <label><input type="radio" name="q4_3" value="D"> D: Having tasks done for me.</label>
+            </div>
+            <div class="question">
+                <p>4.</p>
+                <label><input type="radio" name="q4_4" value="C"> C: Receiving meaningful tokens.</label>
+                <label><input type="radio" name="q4_4" value="E"> E: Getting hugs or physical affection.</label>
+            </div>
+            <div class="question">
+                <p>5.</p>
+                <label><input type="radio" name="q4_5" value="D"> D: Practical help with chores.</label>
+                <label><input type="radio" name="q4_5" value="A"> A: Verbal affirmations of love.</label>
+            </div>
+            <div class="question">
+                <p>6.</p>
+                <label><input type="radio" name="q4_6" value="E"> E: Cuddling or holding hands.</label>
+                <label><input type="radio" name="q4_6" value="B"> B: Quality one-on-one activities.</label>
+            </div>
+            <div class="question">
+                <p>7.</p>
+                <label><input type="radio" name="q4_7" value="A"> A: Praise for my efforts.</label>
+                <label><input type="radio" name="q4_7" value="D"> D: Assistance without asking.</label>
+            </div>
+            <div class="question">
+                <p>8.</p>
+                <label><input type="radio" name="q4_8" value="B"> B: Long walks or shared experiences.</label>
+                <label><input type="radio" name="q4_8" value="C"> C: Personalized presents.</label>
+            </div>
+            <div class="question">
+                <p>9.</p>
+                <label><input type="radio" name="q4_9" value="C"> C: Gifts that show thoughtfulness.</label>
+                <label><input type="radio" name="q4_9" value="E"> E: Affectionate touches.</label>
+            </div>
+            <div class="question">
+                <p>10.</p>
+                <label><input type="radio" name="q4_10" value="D"> D: Errands handled for me.</label>
+                <label><input type="radio" name="q4_10" value="B"> B: Attentive listening.</label>
+            </div>
+            <div class="question">
+                <p>11.</p>
+                <label><input type="radio" name="q4_11" value="E"> E: Physical closeness.</label>
+                <label><input type="radio" name="q4_11" value="A"> A: Words of appreciation.</label>
+            </div>
+            <div class="question">
+                <p>12.</p>
+                <label><input type="radio" name="q4_12" value="A"> A: "I love you" said often.</label>
+                <label><input type="radio" name="q4_12" value="C"> C: Small surprises.</label>
+            </div>
+            <div class="question">
+                <p>13.</p>
+                <label><input type="radio" name="q4_13" value="B"> B: Uninterrupted time.</label>
+                <label><input type="radio" name="q4_13" value="E"> E: Embraces.</label>
+            </div>
+            <div class="question">
+                <p>14.</p>
+                <label><input type="radio" name="q4_14" value="C"> C: Symbolic items.</label>
+                <label><input type="radio" name="q4_14" value="D"> D: Helpful actions.</label>
+            </div>
+            <div class="question">
+                <p>15.</p>
+                <label><input type="radio" name="q4_15" value="D"> D: Support with daily burdens.</label>
+                <label><input type="radio" name="q4_15" value="E"> E: Tender contact.</label>
+            </div>
+        </section>
+        
+        <section id="section5">
+            <h2>Section 5: Values, Motivations, and Desires</h2>
+            <p>First, select your top 5 values by checking the boxes (limit to 5).</p>
+            <div class="question">
+                <label><input type="checkbox" name="values" value="Achievement"> Achievement</label>
+                <label><input type="checkbox" name="values" value="Adventure"> Adventure</label>
+                <label><input type="checkbox" name="values" value="Authority"> Authority</label>
+                <label><input type="checkbox" name="values" value="Autonomy"> Autonomy</label>
+                <label><input type="checkbox" name="values" value="Beauty"> Beauty</label>
+                <label><input type="checkbox" name="values" value="Compassion"> Compassion</label>
+                <label><input type="checkbox" name="values" value="Creativity"> Creativity</label>
+                <label><input type="checkbox" name="values" value="Curiosity"> Curiosity</label>
+                <label><input type="checkbox" name="values" value="Determination"> Determination</label>
+                <label><input type="checkbox" name="values" value="Fairness"> Fairness</label>
+                <label><input type="checkbox" name="values" value="Family"> Family</label>
+                <label><input type="checkbox" name="values" value="Freedom"> Freedom</label>
+                <label><input type="checkbox" name="values" value="Friendship"> Friendship</label>
+                <label><input type="checkbox" name="values" value="Honesty"> Honesty</label>
+                <label><input type="checkbox" name="values" value="Inner Harmony"> Inner Harmony</label>
+                <label><input type="checkbox" name="values" value="Leadership"> Leadership</label>
+                <label><input type="checkbox" name="values" value="Love"> Love</label>
+                <label><input type="checkbox" name="values" value="Security"> Security</label>
+                <label><input type="checkbox" name="values" value="Spirituality"> Spirituality</label>
+                <label><input type="checkbox" name="values" value="Wisdom"> Wisdom</label>
+            </div>
+            <p>Now, rank your top 5 (enter the value names in order, 1=most important).</p>
+            <input type="text" placeholder="1st value" name="rank1">
+            <input type="text" placeholder="2nd value" name="rank2">
+            <input type="text" placeholder="3rd value" name="rank3">
+            <input type="text" placeholder="4th value" name="rank4">
+            <input type="text" placeholder="5th value" name="rank5">
+            <h3>Motivations/Desires</h3>
+            <div class="question">
+                <p>1. Helping others succeed motivates me most.</p>
+                <select name="q5_1">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>2. Financial and material stability is my top desire.</p>
+                <select name="q5_2">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>3. I am driven by intense, passionate experiences.</p>
+                <select name="q5_3">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>4. Career achievements define my success.</p>
+                <select name="q5_4">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>5. Inner peace and balance are my deepest motivations.</p>
+                <select name="q5_5">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>6. Building close family ties drives my choices.</p>
+                <select name="q5_6">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>7. Exploring new ideas and knowledge excites me.</p>
+                <select name="q5_7">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>8. Leading and influencing others is key for me.</p>
+                <select name="q5_8">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>9. Romantic love is a primary life goal.</p>
+                <select name="q5_9">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>10. Personal freedom outweighs other desires.</p>
+                <select name="q5_10">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </section>
+        
+        <section id="section6">
+            <h2>Section 6: Spirituality, Morality, and Creativity</h2>
+            <p>Rate each statement from 1 (Strongly Disagree) to 5 (Strongly Agree).</p>
+            <div class="question">
+                <p>1. Spirituality or religion plays a major role in my daily decisions.</p>
+                <select name="q6_1">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>2. My moral code emphasizes empathy and kindness above all.</p>
+                <select name="q6_2">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>3. I express creativity through artistic activities like drawing or writing.</p>
+                <select name="q6_3">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>4. Fairness and justice are non-negotiable moral values for me.</p>
+                <select name="q6_4">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>5. Spiritual growth (e.g., meditation, prayer) is important to my well-being.</p>
+                <select name="q6_5">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>6. Honesty is the most critical moral principle in relationships.</p>
+                <select name="q6_6">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>7. I am creative in problem-solving and innovative thinking.</p>
+                <select name="q6_7">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>8. Religious or spiritual beliefs guide my life purpose.</p>
+                <select name="q6_8">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>9. Morality for me focuses on personal integrity and self-discipline.</p>
+                <select name="q6_9">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>10. I value creative expression in hobbies like music or design.</p>
+                <select name="q6_10">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>11. Compassion toward others is my top moral priority.</p>
+                <select name="q6_11">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>12. Spirituality helps me find meaning in challenges.</p>
+                <select name="q6_12">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </section>
+    </form>
+    
+    <button onclick="calculateAndSendResults()">Submit and Send Results</button>
+    
+    <div id="results"></div>
+    
+    <script>
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
+        })();
+        
+        function showSection(sectionNum) {
+            document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+            document.getElementById(`section${sectionNum}`).style.display = 'block';
+        }
+        
+        function calculateAndSendResults() {
+            const form = document.getElementById('testForm');
+            const formData = new FormData(form);
+            let results = {};
+            
+            // Section 1: MBTI
+            let e = 0, i = 0, s = 0, n = 0, t = 0, f = 0, j = 0, p = 0;
+            for (let q = 1; q <= 16; q++) {
+                const val = formData.get(`q${q}`) || '';
+                if ([1,5,9,13].includes(q)) val === 'A' ? e++ : i++;
+                if ([2,6,10,14].includes(q)) val === 'A' ? s++ : n++;
+                if ([3,7,11,15].includes(q)) val === 'A' ? t++ : f++;
+                if ([4,8,12,16].includes(q)) val === 'A' ? j++ : p++;
+            }
+            results.mbti = (e > i ? 'E' : 'I') + (s > n ? 'S' : 'N') + (t > f ? 'T' : 'F') + (j > p ? 'J' : 'P');
+            
+            // Section 2: Enneagram
+            let types = new Array(10).fill(0); // Index 1-9
+            const trios = [
+                {A:1, B:2, C:3}, {A:4, B:5, C:6}, {A:7, B:6, C:7}, {A:1, B:2, C:3}, {A:4, B:5, C:6}, {A:8, B:6, C:7},
+                {A:1, B:2, C:3}, {A:4, B:5, C:9}, {A:8, B:6, C:7}, {A:1, B:2, C:3}, {A:4, B:5, C:9}, {A:8, B:6, C:7}
+            ];
+            for (let q = 1; q <= 12; q++) {
+                const val = formData.get(`q2_${q}`) || '';
+                if (val && trios[q-1][val]) types[trios[q-1][val]]++;
+            }
+            const core = types.indexOf(Math.max(...types));
+            results.enneagram = {core: core || 'Undetermined', counts: types.slice(1)};
+            
+            // Section 3: Instincts
+            let spTotal = 0, soTotal = 0, sxTotal = 0;
+            for (let q = 1; q <= 8; q++) {
+                spTotal += parseInt(formData.get(`q3_sp${q}`) || 3);
+                soTotal += parseInt(formData.get(`q3_so${q}`) || 3);
+                sxTotal += parseInt(formData.get(`q3_sx${q}`) || 3);
+            }
+            const spAvg = spTotal / 8, soAvg = soTotal / 8, sxAvg = sxTotal / 8;
+            let stackArr = [{name:'SP', avg:spAvg}, {name:'SO', avg:soAvg}, {name:'SX', avg:sxAvg}].sort((a,b) => b.avg - a.avg);
+            results.instincts = {sp: spAvg.toFixed(2), so: soAvg.toFixed(2), sx: sxAvg.toFixed(2), stack: stackArr.map(s => s.name.toLowerCase()).join('/')};
+            
+            // Section 4: Love Languages
+            let a=0, b=0, c=0, d=0, e=0;
+            for (let q = 1; q <= 15; q++) {
+                const val = formData.get(`q4_${q}`) || '';
+                if (val === 'A') a++;
+                if (val === 'B') b++;
+                if (val === 'C') c++;
+                if (val === 'D') d++;
+                if (val === 'E') e++;
+            }
+            const languages = {words: a, time: b, gifts: c, service: d, touch: e};
+            const primary = Object.keys(languages).reduce((maxKey, key) => languages[key] > languages[maxKey] ? key : maxKey, Object.keys(languages)[0]);
+            results.loveLanguages = {tallies: languages, primary};
+            
+            // Section 5: Values and Motivations
+            let selectedValues = [];
+            document.querySelectorAll('input[name="values"]:checked').forEach(cb => selectedValues.push(cb.value));
+            let ranks = [];
+            for (let r = 1; r <= 5; r++) ranks.push(formData.get(`rank${r}`) || '');
+            results.values = {selected: selectedValues, ranked: ranks};
+            let motTotal = 0;
+            for (let q = 1; q <= 10; q++) motTotal += parseInt(formData.get(`q5_${q}`) || 3);
+            results.motivationsAvg = (motTotal / 10).toFixed(2);
+            
+            // Section 6: Spirituality etc.
+            let spiritTotal = 0, moralTotal = 0, creatTotal = 0;
+            const spiritQs = [1,5,8,12], moralQs = [2,4,6,9,11], creatQs = [3,7,10];
+            spiritQs.forEach(q => spiritTotal += parseInt(formData.get(`q6_${q}`) || 3));
+            moralQs.forEach(q => moralTotal += parseInt(formData.get(`q6_${q}`) || 3));
+            creatQs.forEach(q => creatTotal += parseInt(formData.get(`q6_${q}`) || 3));
+            results.spirituality = {
+                spiritAvg: (spiritTotal / spiritQs.length).toFixed(2),
+                moralAvg: (moralTotal / moralQs.length).toFixed(2),
+                creatAvg: (creatTotal / creatQs.length).toFixed(2)
+            };
+            
+            const resultsJson = JSON.stringify(results, null, 2);
+            const submissionTime = new Date().toISOString();
+            
+            // Send via EmailJS
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                results_json: resultsJson,
+                submission_time: submissionTime
+            }).then(
+                function(response) {
+                    document.getElementById('results').innerText = 'Results sent successfully! Copy below:\n' + resultsJson;
+                },
+                function(error) {
+                    document.getElementById('results').innerText = 'Error sending email: ' + JSON.stringify(error) + '\nResults: ' + resultsJson;
+                }
+            );
+        }
+    </script>
+</body>
+</html>
